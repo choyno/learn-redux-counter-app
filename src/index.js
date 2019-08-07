@@ -3,6 +3,53 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux'; //Global state for redux
+
+
+//LINK TUTS -->>> https://www.youtube.com/watch?v=CVpUuw9XSjY
+
+// STORE -> Globalized State one who handle the whole data
+
+// ACTION -> What kind of activity  you want to do
+//        -> Action is a function that return an object
+//        Sample: Increment
+const increment = () => {
+  return {
+    type: 'INCREMENT'
+  };
+};
+
+const decrement = () => {
+  return {
+    type: 'DECREMENT'
+  };
+};
+
+//REDUCER -> Indicate what function to do base on the action
+const counter = (state = 0, action) => {
+  switch(action.type) {
+    case "INCREMENT":
+          return state + 1;
+    case "DECREMENT":
+          return state - 1;
+
+  }
+};
+
+let store = createStore(counter);
+
+//display it in the console
+store.subscribe(() => console.log(store.getState()));
+
+
+//DISPATCH -> Execute the actual 'ACTION' for Action and Reducre
+store.dispatch(increment());
+store.dispatch(increment());
+store.dispatch(decrement());
+store.dispatch(decrement());
+store.dispatch(decrement());
+
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -10,3 +57,10 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+
+
+
+
+
